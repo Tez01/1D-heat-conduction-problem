@@ -1,0 +1,36 @@
+# Solving AX=B
+import numpy as np
+#Forming A matrix
+A=[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+def zeromaker(n):
+    zeros=[0]*n
+    return(zeros)
+
+for i in range(18):
+    A.append(zeromaker(20))
+B=np.array(A)
+for i in range(18):
+    B[i+1,i]=float(1)
+    B[i+1,i+1]=float(-2)
+    B[i+1,i+2]=float(1)
+C=np.zeros([1,20]) 
+C[0,18]=float(-285)
+C[0,19]=float(284)
+A=np.append(B,C,axis=0)
+
+#Forming X matrix
+X=[]
+for i in range(20):
+    
+    X.append('T'+str(i+1))
+X=np.array([X]).T
+
+#Forming B matrix
+B=np.zeros([19,1])
+B[0,0]=100
+B=np.append(B,np.array([[-288]]),axis=0)
+Ainverse=np.linalg.inv(A)
+X=np.dot(Ainverse,B)
+
+for i in range(20):
+    print('value of temperatures T'+str(i+1) +' '+'is'+ ' '+str(X[i,0]))
